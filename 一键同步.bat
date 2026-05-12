@@ -1,22 +1,16 @@
 @echo off
 chcp 65001 >nul
 echo 正在同步主页到 GitHub（自动重试）...
+cd /d "%~dp0"
 
-:: 进入你的本地项目文件夹（绝对路径，不用改）
-cd /d "C:\Users\yanglianwei\Desktop\资料夹\12.找工作\Homepage\yanglianwei.github.io-master"
-
-:: 1. 添加所有改动（新增/修改/删除）
 git add -A
-
-:: 2. 提交改动（带时间戳）
 git commit -m "Update yanglianwei.github.io: %date% %time%"
 
-:: 3. 自动重试推送，直到成功
 :RETRY
 git push
 if %errorlevel% equ 0 (
     echo.
-    echo ✅ 同步成功！按任意键退出...
+    echo ✅ 同步成功！已推送到 main 分支！
     pause >nul
     exit
 )
